@@ -22,7 +22,7 @@ jobs:
       uses: docker/login-action@v3
       with:
         username: ${{ secrets.USUARIO_DOCKER }}
-        password: ${{ secrets.PASSWORD_DOCKER }
+        password: ${{ secrets.PASSWORD_DOCKER }}
 
     - name: Subir imagen al registry
       run: docker push ${{ secrets.USUARIO_DOCKER }}/angular_ab:${{ steps.tag-imagen.outputs.nombre_completo }}
