@@ -14,7 +14,7 @@ jobs:
 
 
     - name: Construir imagen
-      run: docker build -t ${{ secrets.DOCKER_USUARIO }}/angular_ab .
+      run: docker build -t ${{ secrets.USUARIO_DOCKER }}/angular_ab .
 
     - name: Tag Docker image
       id: tag-image
