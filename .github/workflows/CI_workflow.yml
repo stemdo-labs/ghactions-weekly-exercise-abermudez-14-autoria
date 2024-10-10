@@ -28,4 +28,4 @@ jobs:
       run: echo ${{ secrets.PASSWORD_DOCKER }} | docker login -u ${{ secrets.USUARIO_DOCKER }} --password-stdin
 
     - name: Subir imagen al registry
-      run: docker push ${{ secrets.USUARIO_DOCKER }}/mi-app-angular:${{ steps.tag-imagen.outputs.nombre_completo }}
+      run: docker push ${{ secrets.USUARIO_DOCKER }}/angular_ab:${{ steps.tag-imagen.outputs.nombre_completo }}
