@@ -25,4 +25,4 @@ jobs:
         password: ${{ secrets.PASSWORD_DOCKER }}
 
     - name: Subir imagen al registry
-      run: docker push ${{ secrets.USUARIO_DOCKER }}/angular_ab:${{ steps.tag-imagen.outputs.nombre_completo }}
+      run: docker push ${{ secrets.USUARIO_DOCKER }}/angular_ab:0.0.0
