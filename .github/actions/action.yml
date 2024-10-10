@@ -12,6 +12,7 @@ inputs:
 outputs:
   nombre_completo:
     description: 'El nombre completo de la imagen etiquetada'
+    value: ${{steps.nombre_com.outputs.nombre_completo}}
 
 runs:
   using: "composite"
@@ -19,5 +20,6 @@ runs:
 
       
     - name: Guardar el nombre completo de la imagen etiquetada
-      run: echo "nombre_completo=${{ inputs.nombre_imagen }}:${{ inputs.version }}" >> $GITHUB_ENV
+      id: nombre_com
+      run: echo "nombre_completo=${{ inputs.nombre_imagen }}:${{ inputs.version }}" >> $GITHUB_OUTPUT
       shell: bash
