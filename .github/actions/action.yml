@@ -1,0 +1,27 @@
+name: Taggear Imagen
+description: Etiqueta una imagen Docker con la versión extraída del package.json
+
+inputs:
+  nombre_imagen:
+    description: 'El nombre de la imagen Docker'
+    required: true
+  version:
+    description: 'La versión de la imagen (extraída de package.json)'
+    required: true
+
+outputs:
+  nombre_completo:
+    description: 'El nombre completo de la imagen etiquetada'
+
+runs:
+  using: "composite"
+  steps:
+    - name: Leer la versión del package.json
+      id: coger_version
+      run: echo "version=$(jq -r .version package.json)" >> $GITHUB_ENV
+
+    - name: Taggear la imagen Docker
+      run: docker tag ${{ inputs.nombre_imagen }}:${{ env.version }} ${{ inputs.nombre_imagen }}:${{ env.version }}
+
+    - name: Guardar el nombre completo de la imagen etiquetada
+      run: echo "nombre_completo=${{ inputs.nombre_imagen }}:${{ env.version }}" >> $GITHUB_ENV
