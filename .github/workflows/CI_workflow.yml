@@ -21,7 +21,7 @@ jobs:
 
 
     - name: Construir imagen
-      run: docker build -t ${{ vars.USUARIO_DOCKER }}/angular_ab .
+      run: docker build -t ${{ vars.USUARIO_DOCKER }}/angular_ab:${{steps.coger_version.outputs.version}} .
 
 
     - name: Taggear mediante custom action
