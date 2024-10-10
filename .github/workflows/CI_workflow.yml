@@ -17,15 +17,15 @@ jobs:
     - name: Construir imagen
       run: docker build -t ${{ secrets.USUARIO_DOCKER }}/angular_ab .
 
-    - name: Tag Docker image
-      id: tag-image
-      uses: ./path/to/custom-action  
+    - name: Taggear mediante custom action
+      id: tag-imagen
+      uses: ./.github/actions/  
       with:
-        image_name: 'angular_ab'
-        version: ${{ steps.get_version.outputs.version }}
+        nombre_imagen: 'angular_ab'
+        version: ${{ steps.coger_version.outputs.version }}
 
     - name: Docker hub 
       run: echo ${{ secrets.PASSWORD_DOCKER }} | docker login -u ${{ secrets.USUARIO_DOCKER }} --password-stdin
 
     - name: Subir imagen al registry
-      run: docker push ${{ secrets.USUARIO_DOCKER }}/mi-app-angular:${{ steps.tag-image.outputs.full_image_name }}
+      run: docker push ${{ secrets.USUARIO_DOCKER }}/mi-app-angular:${{ steps.tag-imagen.outputs.nombre_completo }}
