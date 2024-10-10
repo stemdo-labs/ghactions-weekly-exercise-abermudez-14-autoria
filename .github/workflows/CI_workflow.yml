@@ -17,11 +17,12 @@ jobs:
 
     - name: Construir imagen
       run: docker build -t ${{ secrets.USUARIO_DOCKER }}/angular_ab .
-
-
-
-    - name: Docker hub 
-      run: echo ${{ secrets.PASSWORD_DOCKER }} | docker login -u ${{ secrets.USUARIO_DOCKER }} --password-stdin
+    
+    - name: Hacer login en DockerHub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.USUARIO_DOCKER }}
+        password: ${{ secrets.PASSWORD_DOCKER }
 
     - name: Subir imagen al registry
       run: docker push ${{ secrets.USUARIO_DOCKER }}/angular_ab:${{ steps.tag-imagen.outputs.nombre_completo }}
