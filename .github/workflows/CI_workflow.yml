@@ -13,19 +13,32 @@ jobs:
     - name: Clonar repo
       uses: actions/checkout@v3
 
+    - name: Leer la versión del package.json
+      id: coger_version
+      run: echo "version=$(jq -r .version package.json)" >> $GITHUB_ENV
+      shell: bash
 
+    - name: Taggear mediante custom action
+      id: tag-imagen
+      uses: ./.github/actions/  
+      with:
+        nombre_imagen: 'angular_ab'
+        version: "${{ env.version }}"
 
     - name: Construir imagen
       run: docker build -t ${{ secrets.USUARIO_DOCKER }}/angular_ab .
 
 
     - name: TAGGEAR
-      run: docker tag ${{secrets.USUARIO_DOCKER}}/angular_ab:latest  ${{secrets.USUARIO_DOCKER}}/angular_ab:0.0.0
+      run: docker tag ${{secrets.USUARIO_DOCKER}}/${{steps.tag-imagen.outputs.nombre_completo}}
+    
+    
     - name: Hacer login en DockerHub
       uses: docker/login-action@v3
       with:
         username: ${{ secrets.USUARIO_DOCKER }}
         password: ${{ secrets.PASSWORD_DOCKER }}
+
 
     - name: Subir imagen al registry
       run: docker push ${{ secrets.USUARIO_DOCKER }}/angular_ab:0.0.0
