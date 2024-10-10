@@ -1,0 +1,23 @@
+name: CD workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  desplegar:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Clonar repo
+      uses: actions/checkout@v3
+
+    - name: Bajar imagen del registry
+      run: docker pull ${{ secrets.usuario_docker }}/angular_ab:${{ secrets.version_tag }}
+
+    - name: Runnear el contenedor
+      run: |
+        docker run -d -p 80:80 --name angular_ab ${{ secrets.usuario_docker }}/angular_ab:${{ secrets.version_tag }}
+        
+    - name: Hacer curl al nginx
+      run: curl http://localhost:80
