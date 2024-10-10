@@ -16,7 +16,7 @@ jobs:
 
 
     - name: Construir imagen
-      run: docker build -t ${{ secrets.USUARIO_DOCKER }}/angular_ab .
+      run: docker build -t ${{ secrets.USUARIO_DOCKER }}/angular_ab:000 .
     
     - name: Hacer login en DockerHub
       uses: docker/login-action@v3
