@@ -37,6 +37,9 @@ jobs:
         username: ${{ vars.USUARIO_DOCKER }}
         password: ${{ secrets.PASSWORD_DOCKER }}
 
+    - name: Verificar nombre completo de la imagen
+      run: echo "Nombre completo de la imagen --> ${{ steps.tag-imagen.outputs.nombre_completo }}"
+
 
     - name: Subir imagen al registry
       run: docker push ${{ vars.USUARIO_DOCKER }}/${{steps.tag-imagen.outputs.nombre_completo}}
