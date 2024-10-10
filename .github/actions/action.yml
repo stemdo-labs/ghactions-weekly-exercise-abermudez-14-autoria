@@ -17,10 +17,6 @@ runs:
   using: "composite"
   steps:
 
-    - name: Leer la versión del package.json
-      id: coger_version
-      run: echo "version=$(jq -r .version package.json)" >> $GITHUB_ENV
-      shell: bash
 
       
     - name: Guardar el nombre completo de la imagen etiquetada
