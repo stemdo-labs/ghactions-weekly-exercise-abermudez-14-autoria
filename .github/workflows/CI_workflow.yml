@@ -16,8 +16,11 @@ jobs:
 
 
     - name: Construir imagen
-      run: docker build -t ${{ secrets.USUARIO_DOCKER }}/angular_ab:000 .
-    
+      run: docker build -t ${{ secrets.USUARIO_DOCKER }}/angular_ab .
+
+
+    - name: TAGGEAR
+      run: docker tag ${{secrets.USUARIO_DOCKER}}/angular_ab:latest  ${{secrets.USUARIO_DOCKER}}/angular_ab:0.0.0
     - name: Hacer login en DockerHub
       uses: docker/login-action@v3
       with:
