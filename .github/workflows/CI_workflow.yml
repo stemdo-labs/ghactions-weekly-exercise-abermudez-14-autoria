@@ -13,16 +13,17 @@ jobs:
     - name: Clonar repo
       uses: actions/checkout@v3
 
-
-    - name: Construir imagen
-      run: docker build -t ${{ secrets.USUARIO_DOCKER }}/angular_ab .
-
     - name: Taggear mediante custom action
       id: tag-imagen
       uses: ./.github/actions/  
       with:
         nombre_imagen: 'angular_ab'
         version: ${{ steps.coger_version.outputs.version }}
+
+    - name: Construir imagen
+      run: docker build -t ${{ secrets.USUARIO_DOCKER }}/angular_ab .
+
+
 
     - name: Docker hub 
       run: echo ${{ secrets.PASSWORD_DOCKER }} | docker login -u ${{ secrets.USUARIO_DOCKER }} --password-stdin
