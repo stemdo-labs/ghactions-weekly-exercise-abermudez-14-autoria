@@ -16,7 +16,9 @@ jobs:
   
     - name: Leer la versión del package.json
       id: coger_version
-      run: echo "version=$(jq -r .version package.json)" >> $GITHUB_OUTPUT
+      run: |
+           version=$(jq -r .version package.json)
+           echo "version=$version" >> $GITHUB_ENV
       shell: bash
 
 
