@@ -16,13 +16,14 @@ outputs:
 runs:
   using: "composite"
   steps:
+  
     - name: Leer la versión del package.json
       id: coger_version
       run: echo "version=$(jq -r .version package.json)" >> $GITHUB_ENV
       shell: bash
-    - name: Taggear la imagen Docker
-      run: docker tag ${{ inputs.nombre_imagen }}:${{ env.version }} ${{ inputs.nombre_imagen }}:${{ env.version }}
-      shell: bash
+      
+
+      
     - name: Guardar el nombre completo de la imagen etiquetada
       run: echo "nombre_completo=${{ inputs.nombre_imagen }}:${{ env.version }}" >> $GITHUB_ENV
       shell: bash
