@@ -8,6 +8,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: prod
     steps:
     - name: Clonar repo
       uses: actions/checkout@v3
@@ -24,7 +25,7 @@ jobs:
         version: ${{ steps.get_version.outputs.version }}
 
     - name: Docker hub 
-      run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+      run: echo ${{ secrets.PASSWORD_DOCKER }} | docker login -u ${{ secrets.USUARIO_DOCKER }} --password-stdin
 
     - name: Subir imagen al registry
-      run: docker push ${{ secrets.DOCKER_USERNAME }}/mi-app-angular:${{ steps.tag-image.outputs.full_image_name }}
+      run: docker push ${{ secrets.USUARIO_DOCKER }}/mi-app-angular:${{ steps.tag-image.outputs.full_image_name }}
