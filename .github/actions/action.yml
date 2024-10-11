@@ -1,0 +1,21 @@
+name: Nombre completo
+description: Etiquetar imagen
+
+inputs:
+  nombre_imagen:
+    required: true
+  version:
+    required: true
+
+outputs:
+  nombre_completo:
+    value: ${{steps.nombre_completo.outputs.nombre_completo}}
+
+runs:
+  using: "composite"
+  steps:
+      
+    - name: Guardar nombre completo 
+      id: nombre_completo
+      run: echo "nombre_completo=${{ inputs.nombre_imagen }}:${{ inputs.version }}" >> $GITHUB_OUTPUT
+      shell: bash

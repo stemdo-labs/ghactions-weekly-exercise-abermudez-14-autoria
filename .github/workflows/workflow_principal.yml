@@ -1,0 +1,45 @@
+name: Workflow principal para llamar a los reusables 
+
+on:
+  push:
+    branches:
+      - main
+      - development 
+jobs:
+  setear_entorno:
+    runs-on: ubuntu-latest
+    outputs:
+      entorno: ${{ steps.entorno.outputs.entorno  }}
+    steps:
+          - name: Settear entorno
+            id: entorno
+            run: |
+              if [ "${{ github.ref }}" == "refs/heads/main" ]; then
+                 echo "Entorno configurado en Prod"
+                 echo "entorno=prod" >> $GITHUB_OUTPUT
+              elif [ "${{ github.ref }}" == "refs/heads/development" ]; then
+                echo "Entorno configurado en UAT"
+                echo "entorno=uat" >> $GITHUB_OUTPUT
+              else
+                echo "Rama distinta a main / develop, entorno no configurado"
+              fi
+  
+  lanzar_CI:
+      needs: setear_entorno
+      uses: ./.github/workflows/CI_workflow.yml
+      secrets: inherit
+      with:
+        entorno: ${{ needs.setear_entorno.outputs.entorno  }}
+
+          
+  lanzar_CD:
+      needs: 
+        - lanzar_CI
+        - setear_entorno
+      uses: ./.github/workflows/CD_workflow.yml
+      secrets: inherit
+      with:
+        nombre_completo: ${{ needs.lanzar_CI.outputs.nombre_completo}}
+        entorno: ${{ needs.setear_entorno.outputs.entorno  }}
+
+            
