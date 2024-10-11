@@ -24,17 +24,18 @@ jobs:
            echo "version=$version" >> $GITHUB_OUTPUT
       shell: bash
 
-
-    - name: Construir imagen
-      run: docker build -t ${{ vars.USUARIO_DOCKER }}/${{steps.tag-imagen.outputs.nombre_completo}} .
-
-
     - name: Taggear mediante custom action
       id: tag-imagen
       uses: ./.github/actions/  
       with:
         nombre_imagen: 'angular_ab'
         version: "${{ steps.coger_version.outputs.version }}"
+
+    - name: Construir imagen
+      run: docker build -t ${{ vars.USUARIO_DOCKER }}/${{steps.tag-imagen.outputs.nombre_completo}} .
+
+
+
 
     
     - name: Hacer login en DockerHub
