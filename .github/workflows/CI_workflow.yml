@@ -7,6 +7,25 @@ on:
         value: ${{jobs.build.outputs.nombre_completo}}
 
 jobs:
+
+
+
+  testear:
+      runs-on: ubuntu-latest
+      steps:
+          - name: Settear entorno
+            run: |
+              if [ "${{ github.ref }}" == "refs/heads/main" ]; then
+                 echo "entorno=prod" >> $GITHUB_ENV
+              elif [ "${{ github.ref }}" == "refs/heads/uat" ]
+                echo "entorno=uat" >> $GITHUB_ENV
+              fi
+          - name: test
+            if: env.entorno == 'prod'
+            run: | 
+              echo "Haciendo tests de cobertura de código..."
+              "sleep(5)"
+
   build:
     runs-on: ubuntu-latest
     outputs:
