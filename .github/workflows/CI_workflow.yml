@@ -18,18 +18,8 @@ jobs:
   testear:
       runs-on: ubuntu-latest
       steps:
-          - name: Settear entorno
-            id: entorno
-            run: |
-              if [ "${{ github.ref }}" == "refs/heads/main" ]; then
-                 echo "entorno=prod" >> $GITHUB_ENV
-              elif [ "${{ github.ref }}" == "refs/heads/development" ]; then
-                echo "entorno=uat" >> $GITHUB_ENV
-              else
-                echo "Rama distinta a main / develop, entorno no configurado"
-              fi
           - name: test
-            if: env.entorno == 'prod'
+            if: ${{inputs.entorno}} == 'prod'
             run: | 
               echo "Haciendo tests de cobertura de código..."
               "sleep(5)"
