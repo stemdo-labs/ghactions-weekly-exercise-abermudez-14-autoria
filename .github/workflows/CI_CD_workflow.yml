@@ -9,11 +9,14 @@ jobs:
 
   
   lanzar_CI:
+      
       uses: ./.github/workflows/CI_workflow.yml
+      secrets: inherit
 
           
   lanzar_CD:
       needs: lanzar_CI
       uses: ./.github/workflows/CD_workflow.yml
+      secrets: inherit
 
             
