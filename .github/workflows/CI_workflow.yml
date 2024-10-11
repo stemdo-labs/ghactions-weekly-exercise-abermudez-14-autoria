@@ -17,7 +17,7 @@ jobs:
             run: |
               if [ "${{ github.ref }}" == "refs/heads/main" ]; then
                  echo "entorno=prod" >> $GITHUB_ENV
-              elif [ "${{ github.ref }}" == "refs/heads/uat" ]
+              elif [ "${{ github.ref }}" == "refs/heads/development" ]
                 echo "entorno=uat" >> $GITHUB_ENV
               fi
           - name: test
