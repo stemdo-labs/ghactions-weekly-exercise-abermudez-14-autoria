@@ -22,7 +22,7 @@ jobs:
             if: ${{inputs.entorno}} == 'prod'
             run: | 
               echo "Haciendo tests de cobertura de código..."
-              "sleep(5)"
+              sleep 5
 
   build:
     if: ${{ always() }}
