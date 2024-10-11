@@ -13,7 +13,7 @@ jobs:
 
     - name: Taggear mediante custom action
       id: tag-imagen
-      uses: ./.github/actions/  
+      uses: abermudez-14/ghactions-weekly-exercise-abermudez-14/.github/actions 
       with:
         nombre_imagen: 'angular_ab'
         version: "${{ steps.coger_version.outputs.version }}"
