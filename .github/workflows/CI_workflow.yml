@@ -32,10 +32,11 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       nombre_completo: ${{steps.tag-imagen.outputs.nombre_completo}}
-    environment: prod
+    environment: ${{ env.entorno }}
     steps:
     - name: Clonar repo
       uses: actions/checkout@v3
+      
 
   
     - name: Leer la versión del package.json
