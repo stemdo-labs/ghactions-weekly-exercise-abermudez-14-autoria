@@ -16,7 +16,7 @@ jobs:
 
     - name: Runnear el contenedor
       run: |
-        docker run -d -p 80:80 --name angular_ab ${{ secrets.USUARIO_DOCKER }}/angular_ab:1.0.0
+        docker run -d -p 80:80 --name angular_ab ${{ vars.USUARIO_DOCKER }}/angular_ab:1.0.0
         
     - name: Hacer curl al nginx
       run: curl http://localhost:80
