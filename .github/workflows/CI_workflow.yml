@@ -2,6 +2,9 @@ name: CI workflow
 
 on:
   workflow_call:
+    outputs:
+      tag:
+        value: ${{jobs.build.outputs.tag}}
 
 jobs:
   build:
