@@ -18,6 +18,7 @@ jobs:
       needs: lanzar_CI
       uses: ./.github/workflows/CD_workflow.yml
       secrets: inherit
-      with: ${{ needs.lanzar_CI.outputs.version}}
+      with:
+        version: ${{ needs.lanzar_CI.outputs.version}}
 
             
