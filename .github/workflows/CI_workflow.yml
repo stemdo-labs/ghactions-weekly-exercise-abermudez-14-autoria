@@ -4,7 +4,7 @@ on:
   workflow_call:
     outputs:
       tag:
-        value: ${{jobs.build.outputs.tag}}
+        value: ${{jobs.build.outputs.version}}
 
 jobs:
   build:
