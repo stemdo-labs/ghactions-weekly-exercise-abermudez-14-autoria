@@ -12,7 +12,7 @@ inputs:
 outputs:
   nombre_completo:
     description: 'El nombre completo de la imagen etiquetada'
-    value: ${{steps.nombre_com.outputs.nombre_completo}}
+    value: ${{steps.nombre_completo.outputs.nombre_completo}}
 
 runs:
   using: "composite"
