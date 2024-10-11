@@ -35,7 +35,6 @@ jobs:
     - name: Clonar repo
       uses: actions/checkout@v3
       
-
   
     - name: Leer la versión del package.json
       id: coger_version
@@ -53,9 +52,6 @@ jobs:
 
     - name: Construir imagen
       run: docker build -t ${{ vars.USUARIO_DOCKER }}/${{steps.tag-imagen.outputs.nombre_completo}} .
-
-
-
 
     
     - name: Hacer login
