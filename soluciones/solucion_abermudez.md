@@ -5,6 +5,7 @@
 
 ![imagen](https://github.com/user-attachments/assets/aa0d692e-2d4a-4b4c-a95d-8d6eebc36cf9)
 
+---
 
 ### Archivos
 
@@ -62,12 +63,13 @@ jobs:
 
 ```
 
+----
 
 #### CI_worfklow.yml
 
 ```yml
 
-  name: CI workflow
+name: CI workflow
 
 on:
   workflow_call:
@@ -78,7 +80,7 @@ on:
         
     outputs:
       nombre_completo:
-        value: ${{jobs.build.outputs.nombre_completo}}
+        value: ${{jobs.buildear.outputs.nombre_completo}}
 
 jobs:
 
@@ -93,7 +95,7 @@ jobs:
               echo "Haciendo tests de cobertura de código..."
               sleep 5
 
-  build:
+  buildear:
     if: ${{ always() }}
     needs: testear
     runs-on: ubuntu-latest
@@ -113,7 +115,7 @@ jobs:
            echo "version=$version" >> $GITHUB_OUTPUT
       shell: bash
 
-    - name: Taggear mediante custom action
+    - name: Taggear con custom action
       id: tag-imagen
       uses: ./.github/actions/  
       with:
@@ -127,17 +129,87 @@ jobs:
 
 
     
-    - name: Hacer login en DockerHub
+    - name: Hacer login
       uses: docker/login-action@v3
       with:
         username: ${{ vars.USUARIO_DOCKER }}
         password: ${{ secrets.PASSWORD_DOCKER }}
 
-    - name: Verificar nombre completo de la imagen
-      run: echo "Nombre completo de la imagen --> ${{ steps.tag-imagen.outputs.nombre_completo }}"
+    - name: Verificar nombre completo 
+      run: echo "Nombre completo --> ${{ steps.tag-imagen.outputs.nombre_completo }}"
 
 
     - name: Subir imagen al registry
       run: docker push ${{ vars.USUARIO_DOCKER }}/${{steps.tag-imagen.outputs.nombre_completo}}
+
+```
+
+----
+
+#### CD_workflow.yml
+
+```yml
+
+name: CD workflow
+
+on:
+  workflow_call:
+    inputs:
+      nombre_completo:
+        required: true
+        type: string
+      entorno:
+        required: true
+        type: string
+   
+jobs:
+  desplegar_CD:
+    runs-on: ubuntu-latest
+    environment: ${{inputs.entorno}}
+    steps:
+
+
+    - name: Bajar imagen del registry
+      run: docker pull ${{ vars.USUARIO_DOCKER }}/${{ inputs.nombre_completo }} 
+
+    - name: Runnear el contenedor
+      run: |
+       docker run -d -p 80:8080 --name angular_ab ${{ vars.USUARIO_DOCKER }}/${{ inputs.nombre_completo }}
+        
+    - name: Hacer curl al nginx
+      run: curl http://localhost:80
+    
+
+```
+
+----
+
+#### Action.yml
+
+```yaml
+
+name: Nombre completo
+description: Etiquetar imagen
+
+inputs:
+  nombre_imagen:
+    required: true
+  version:
+    required: true
+
+outputs:
+  nombre_completo:
+    value: ${{steps.nombre_completo.outputs.nombre_completo}}
+
+runs:
+  using: "composite"
+  steps:
+      
+    - name: Guardar nombre completo 
+      id: nombre_completo
+      run: echo "nombre_completo=${{ inputs.nombre_imagen }}:${{ inputs.version }}" >> $GITHUB_OUTPUT
+      shell: bash
+
+
 
 ```
