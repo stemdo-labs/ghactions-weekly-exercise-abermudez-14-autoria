@@ -15,11 +15,11 @@ jobs:
 
 
     - name: Bajar imagen del registry
-      run: docker pull ${{ vars.USUARIO_DOCKER }}/${{ inputs.version }} 
+      run: docker pull ${{ vars.USUARIO_DOCKER }}/angular_ab:${{ inputs.version }} 
 
     - name: Runnear el contenedor
       run: |
-       docker run -d -p 80:8080 --name angular_ab ${{ vars.USUARIO_DOCKER }}/${{ inputs.version }}
+       docker run -d -p 80:8080 --name angular_ab ${{ vars.USUARIO_DOCKER }}/angular_ab:${{ inputs.version }}
         
     - name: Hacer curl al nginx
       run: curl http://localhost:80
