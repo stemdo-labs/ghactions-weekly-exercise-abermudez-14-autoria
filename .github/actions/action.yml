@@ -1,0 +1,25 @@
+name: Taggear Imagen
+description: Etiqueta una imagen Docker con la versión extraída del package.json
+
+inputs:
+  nombre_imagen:
+    description: 'El nombre de la imagen Docker'
+    required: true
+  version:
+    description: 'La versión de la imagen (extraída de package.json)'
+    required: true
+
+outputs:
+  nombre_completo:
+    description: 'El nombre completo de la imagen etiquetada'
+    value: ${{steps.nombre_completo.outputs.nombre_completo}}
+
+runs:
+  using: "composite"
+  steps:
+
+      
+    - name: Guardar el nombre completo de la imagen etiquetada
+      id: nombre_completo
+      run: echo "nombre_completo=${{ inputs.nombre_imagen }}:${{ inputs.version }}" >> $GITHUB_OUTPUT
+      shell: bash
