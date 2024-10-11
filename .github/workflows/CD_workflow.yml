@@ -8,14 +8,23 @@ jobs:
     runs-on: ubuntu-latest
     environment: prod
     steps:
+    
+
+
+    - name: Taggear mediante custom action
+      id: tag-imagen
+      uses: ./.github/actions/  
+      with:
+        nombre_imagen: 'angular_ab'
+        version: "${{ steps.coger_version.outputs.version }}"
 
 
     - name: Bajar imagen del registry
-      run: docker pull ${{ vars.USUARIO_DOCKER }}/angular_ab:1.0.0 
+      run: docker pull ${{ vars.USUARIO_DOCKER }}/${{ steps.tag-imagen.outputs.nombre_completo }} 
 
     - name: Runnear el contenedor
       run: |
-        docker run -d -p 80:8080 --name angular_ab ${{ vars.USUARIO_DOCKER }}/angular_ab:1.0.0
+        docker run -d -p 80:8080 --name angular_ab ${{ vars.USUARIO_DOCKER }}/${{ steps.tag-imagen.outputs.nombre_completo }}
         
     - name: Hacer curl al nginx
       run: curl http://localhost:80
