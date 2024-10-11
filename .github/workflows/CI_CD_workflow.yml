@@ -1,0 +1,21 @@
+name: Workflow principal para llamar a los reusables
+
+on:
+  push:
+    branches:
+      - main
+      - development
+jobs:
+  lanzar_CI:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Llamar al CI
+          uses: ./.github/workflows/CI_workflow.yml
+
+        - name: Verificar CI
+          if: ${{ success() }}
+          run: echo "CI completado con éxito. Lanzando CD..."
+
+        - name: Llamar al CD
+          uses: ./.github/workflows/CD_workflow.yml
+            
