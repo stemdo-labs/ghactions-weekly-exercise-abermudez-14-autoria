@@ -23,11 +23,11 @@ jobs:
               fi
   
   lanzar_CI:
-      
+      needs: setear_entorno
       uses: ./.github/workflows/CI_workflow.yml
       secrets: inherit
       with:
-        entorno: ${{ jobs.setear_entorno.outputs.entorno  }}
+        entorno: ${{ needs.setear_entorno.outputs.entorno  }}
 
           
   lanzar_CD:
