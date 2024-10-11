@@ -1,4 +1,4 @@
-name: Taggear Imagen
+name: Nombre completo
 description: Etiqueta una imagen Docker con la versión extraída del package.json
 
 inputs:
