@@ -253,11 +253,15 @@ runs:
 
 ##### Push a main
 
+> Cuando hacemos el push a main, realiza los tests de cobertura de código mediante el job `testear` del CI
+
 ![deploy_PROD](https://github.com/user-attachments/assets/9fd2a533-b004-4ca2-ac32-53af83617f82)
 
 
 ##### Push a development
 
-![deploy_UAT](https://github.com/user-attachments/assets/8ddb1651-6fc4-4ac5-b71a-018ac0c367ab)
+> Cuando hacemos el push a `development`, el workflow se salta los test de cobertura de código
+
+![deploy_UAT](https://github.com/user-attachments/assets/731f7050-86cb-4bb8-8ca8-6f16e26c3be4)
 
 
