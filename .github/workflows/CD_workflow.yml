@@ -9,15 +9,14 @@ jobs:
   desplegar:
     runs-on: ubuntu-latest
     steps:
-    - name: Clonar repo
-      uses: actions/checkout@v3
+
 
     - name: Bajar imagen del registry
-      run: docker pull ${{ secrets.usuario_docker }}/angular_ab:${{ secrets.version_tag }}
+      run: docker pull ${{ vars.USUARIO_DOCKER }}/angular_ab:1.0.0 
 
     - name: Runnear el contenedor
       run: |
-        docker run -d -p 80:80 --name angular_ab ${{ secrets.usuario_docker }}/angular_ab:${{ secrets.version_tag }}
+        docker run -d -p 80:80 --name angular_ab ${{ secrets.USUARIO_DOCKER }}/angular_ab:1.0.0
         
     - name: Hacer curl al nginx
       run: curl http://localhost:80
