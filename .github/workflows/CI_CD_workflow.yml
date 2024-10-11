@@ -19,6 +19,6 @@ jobs:
       uses: ./.github/workflows/CD_workflow.yml
       secrets: inherit
       with:
-        version: ${{ needs.lanzar_CI.outputs.nombre_completo}}
+        nombre_completo: ${{ needs.lanzar_CI.outputs.nombre_completo}}
 
             
