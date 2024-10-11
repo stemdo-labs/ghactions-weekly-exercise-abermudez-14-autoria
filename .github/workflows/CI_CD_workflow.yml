@@ -18,7 +18,11 @@ jobs:
         - name: Verificar CI
           if: ${{ success() }}
           run: echo "CI completado con éxito. Lanzando CD..."
-
-        - name: Llamar al CD
-          uses: ./.github/workflows/CD_workflow.yml
+          
+  lanzar_CD:
+        runs-on: ubuntu-latest
+        steps:
+        
+          - name: Llamar al CD
+            uses: ./.github/workflows/CD_workflow.yml
             
