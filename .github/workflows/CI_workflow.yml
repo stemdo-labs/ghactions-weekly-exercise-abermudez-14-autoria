@@ -16,10 +16,10 @@ jobs:
 
 
   testear:
+      if: ${{ inputs.entorno }} == 'prod'
       runs-on: ubuntu-latest
       steps:
           - name: test
-            if: ${{inputs.entorno}} == 'prod'
             run: | 
               echo "Haciendo tests de cobertura de código..."
               sleep 5
