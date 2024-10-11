@@ -1,0 +1,24 @@
+name: Workflow principal para llamar a los reusables 
+
+on:
+  push:
+    branches:
+      - main
+      - development 
+jobs:
+
+  
+  lanzar_CI:
+      
+      uses: ./.github/workflows/CI_workflow.yml
+      secrets: inherit
+
+          
+  lanzar_CD:
+      needs: lanzar_CI
+      uses: ./.github/workflows/CD_workflow.yml
+      secrets: inherit
+      with:
+        nombre_completo: ${{ needs.lanzar_CI.outputs.nombre_completo}}
+
+            
