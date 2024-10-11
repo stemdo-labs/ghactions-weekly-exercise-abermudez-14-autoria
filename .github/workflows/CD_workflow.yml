@@ -1,0 +1,26 @@
+name: CD workflow
+
+on:
+  workflow_call:
+    inputs:
+      nombre_completo:
+        required: true
+        type: string
+   
+jobs:
+  desplegar_CD:
+    runs-on: ubuntu-latest
+    environment: prod
+    steps:
+
+
+    - name: Bajar imagen del registry
+      run: docker pull ${{ vars.USUARIO_DOCKER }}/${{ inputs.nombre_completo }} 
+
+    - name: Runnear el contenedor
+      run: |
+       docker run -d -p 80:8080 --name angular_ab ${{ vars.USUARIO_DOCKER }}/${{ inputs.nombre_completo }}
+        
+    - name: Hacer curl al nginx
+      run: curl http://localhost:80
+    
