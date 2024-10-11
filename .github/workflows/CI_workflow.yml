@@ -3,7 +3,7 @@ name: CI workflow
 on:
   workflow_call:
     outputs:
-      tag:
+      version:
         value: ${{jobs.build.outputs.version}}
 
 jobs:
