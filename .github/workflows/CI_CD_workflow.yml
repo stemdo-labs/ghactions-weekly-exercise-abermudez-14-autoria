@@ -9,6 +9,9 @@ jobs:
   lanzar_CI:
       runs-on: ubuntu-latest
       steps:
+        - name: Clonar repo
+          uses: actions/checkout@v3
+          
         - name: Llamar al CI
           uses: ./.github/workflows/CI_workflow.yml
 
