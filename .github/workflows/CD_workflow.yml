@@ -1,11 +1,8 @@
 name: CD workflow
 
 on:
-  workflow_call:
-    inputs:
-      version:
-        required: true
-        type: string
+  workflow_dispatch:
+
   
 jobs:
   desplegar_CD:
