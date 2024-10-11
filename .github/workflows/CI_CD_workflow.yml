@@ -6,26 +6,14 @@ on:
       - main
       - development
 jobs:
-  lanzar_CI:
-      runs-on: ubuntu-latest
-      steps:
-        - name: Clonar repo
-          uses: actions/checkout@v3
-          
-        - name: Llamar al CI
-          uses: abermudez-14/ghactions-weekly-exercise-abermudez-14/.github/workflows/CI_workflow.yml@main
 
-        - name: Verificar CI
-          if: ${{ success() }}
-          run: echo "CI completado con éxito. Lanzando CD..."
+  
+  lanzar_CI:
+      uses: ./.github/workflows/CI_workflow.yml
+
           
   lanzar_CD:
-        runs-on: ubuntu-latest
-        steps:
+      needs: lanzar_CI
+      uses: ./.github/workflows/CD_workflow.yml
 
-        - name: Clonar repo
-          uses: actions/checkout@v3
-          
-        - name: Llamar al CD
-          uses: ./.github/workflows/CD_workflow.yml
             
