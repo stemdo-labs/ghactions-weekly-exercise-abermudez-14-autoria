@@ -6,11 +6,14 @@ on:
       nombre_completo:
         required: true
         type: string
+      entorno:
+        required: true
+        type: string
    
 jobs:
   desplegar_CD:
     runs-on: ubuntu-latest
-    environment: prod
+    environment: ${{inputs.entorno}}
     steps:
 
 
