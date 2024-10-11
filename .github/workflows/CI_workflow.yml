@@ -9,7 +9,7 @@ on:
         
     outputs:
       nombre_completo:
-        value: ${{jobs.build.outputs.nombre_completo}}
+        value: ${{jobs.buildear.outputs.nombre_completo}}
 
 jobs:
 
@@ -24,7 +24,7 @@ jobs:
               echo "Haciendo tests de cobertura de código..."
               sleep 5
 
-  build:
+  buildear:
     if: ${{ always() }}
     needs: testear
     runs-on: ubuntu-latest
@@ -44,7 +44,7 @@ jobs:
            echo "version=$version" >> $GITHUB_OUTPUT
       shell: bash
 
-    - name: Taggear mediante custom action
+    - name: Taggear con custom action
       id: tag-imagen
       uses: ./.github/actions/  
       with:
@@ -58,14 +58,14 @@ jobs:
 
 
     
-    - name: Hacer login en DockerHub
+    - name: Hacer login
       uses: docker/login-action@v3
       with:
         username: ${{ vars.USUARIO_DOCKER }}
         password: ${{ secrets.PASSWORD_DOCKER }}
 
-    - name: Verificar nombre completo de la imagen
-      run: echo "Nombre completo de la imagen --> ${{ steps.tag-imagen.outputs.nombre_completo }}"
+    - name: Verificar nombre completo 
+      run: echo "Nombre completo --> ${{ steps.tag-imagen.outputs.nombre_completo }}"
 
 
     - name: Subir imagen al registry
