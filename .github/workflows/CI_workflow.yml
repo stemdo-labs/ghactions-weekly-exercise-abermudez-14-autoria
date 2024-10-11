@@ -9,6 +9,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{jobs.build.outputs.version}}
     environment: prod
     steps:
     - name: Clonar repo
