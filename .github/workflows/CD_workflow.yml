@@ -13,7 +13,7 @@ jobs:
 
     - name: Taggear mediante custom action
       id: tag-imagen
-      uses: stemdo-labs/ghactions-weekly-exercise-abermudez-14/.github/actions@main
+      uses: stemdo-labs/ghactions-weekly-exercise-abermudez-14/.github/actions/action.yml@main
       with:
         nombre_imagen: 'angular_ab'
         version: "${{ steps.coger_version.outputs.version }}"
