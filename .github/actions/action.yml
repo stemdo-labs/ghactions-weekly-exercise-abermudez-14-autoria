@@ -20,6 +20,6 @@ runs:
 
       
     - name: Guardar el nombre completo de la imagen etiquetada
-      id: nombre_com
+      id: nombre_completo
       run: echo "nombre_completo=${{ inputs.nombre_imagen }}:${{ inputs.version }}" >> $GITHUB_OUTPUT
       shell: bash
