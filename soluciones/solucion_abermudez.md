@@ -231,6 +231,7 @@ runs:
   ![imagen](https://github.com/user-attachments/assets/40f7a95e-b09b-49f4-b211-3fbeea4a8676)
 
 ----
+----
 
 #### Aprobadores de código
 
@@ -241,4 +242,22 @@ runs:
 - Crear regla para apuntar al archivo `CODEOWNERS`
   
 ![imagen](https://github.com/user-attachments/assets/d3af70cb-4e40-48f4-86b8-a132a3f2d023)
+
+![aprobadores2](https://github.com/user-attachments/assets/8a0185ff-6ca7-457f-ba05-84198adc1b37)
+
+
+----
+----
+
+#### Ejecuciones
+
+##### Push a main
+
+![deploy_PROD](https://github.com/user-attachments/assets/9fd2a533-b004-4ca2-ac32-53af83617f82)
+
+
+##### Push a development
+
+![deploy_UAT](https://github.com/user-attachments/assets/8ddb1651-6fc4-4ac5-b71a-018ac0c367ab)
+
 
