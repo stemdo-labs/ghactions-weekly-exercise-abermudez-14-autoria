@@ -31,10 +31,13 @@ jobs:
 
           
   lanzar_CD:
-      needs: lanzar_CI
+      needs: 
+        - lanzar_CI
+        - setear_entorno
       uses: ./.github/workflows/CD_workflow.yml
       secrets: inherit
       with:
         nombre_completo: ${{ needs.lanzar_CI.outputs.nombre_completo}}
+        entorno: ${{ needs.setear_entorno.outputs.entorno  }}
 
             
