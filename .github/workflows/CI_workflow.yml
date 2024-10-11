@@ -4,13 +4,13 @@ on:
   workflow_call:
     outputs:
       version:
-        value: ${{jobs.build.outputs.version}}
+        value: ${{jobs.build.outputs.nombre_completo}}
 
 jobs:
   build:
     runs-on: ubuntu-latest
     outputs:
-      version: ${{steps.coger_version.outputs.version}}
+      nombre_completo: ${{steps.tag-imagen.outputs.nombre_completo}}
     environment: prod
     steps:
     - name: Clonar repo
@@ -26,7 +26,7 @@ jobs:
 
 
     - name: Construir imagen
-      run: docker build -t ${{ vars.USUARIO_DOCKER }}/angular_ab:${{steps.coger_version.outputs.version}} .
+      run: docker build -t ${{ vars.USUARIO_DOCKER }}/${{steps.tag-imagen.outputs.nombre_completo}} .
 
 
     - name: Taggear mediante custom action
