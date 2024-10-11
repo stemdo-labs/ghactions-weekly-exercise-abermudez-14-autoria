@@ -2,6 +2,11 @@ name: CI workflow
 
 on:
   workflow_call:
+    inputs:
+      entorno:
+        required: true
+        type: string
+        
     outputs:
       nombre_completo:
         value: ${{jobs.build.outputs.nombre_completo}}
@@ -14,6 +19,7 @@ jobs:
       runs-on: ubuntu-latest
       steps:
           - name: Settear entorno
+            id: entorno
             run: |
               if [ "${{ github.ref }}" == "refs/heads/main" ]; then
                  echo "entorno=prod" >> $GITHUB_ENV
@@ -29,10 +35,12 @@ jobs:
               "sleep(5)"
 
   build:
+    if: ${{ always() }}
+    needs: testear
     runs-on: ubuntu-latest
     outputs:
       nombre_completo: ${{steps.tag-imagen.outputs.nombre_completo}}
-    environment: ${{ env.entorno }}
+    environment: ${{inputs.entorno}}
     steps:
     - name: Clonar repo
       uses: actions/checkout@v3
