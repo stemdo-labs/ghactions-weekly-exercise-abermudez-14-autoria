@@ -6,6 +6,7 @@
 ![imagen](https://github.com/user-attachments/assets/aa0d692e-2d4a-4b4c-a95d-8d6eebc36cf9)
 
 ---
+---
 
 ### Archivos
 
@@ -213,3 +214,31 @@ runs:
 
 
 ```
+
+----
+----
+
+### Configuraciones
+
+#### Configuración de entornos y variables
+
+- Entornos
+  
+  ![imagen](https://github.com/user-attachments/assets/8e4a5ef2-dd3b-4455-a237-c26e5a01e6df)
+
+   Dentro de cada entorno, se encuentran el secreto`PASSWORD_DOCKER` y la variable `USUARIO_DOCKER`
+
+  ![imagen](https://github.com/user-attachments/assets/40f7a95e-b09b-49f4-b211-3fbeea4a8676)
+
+----
+
+#### Aprobadores de código
+
+##### Archivo CODEOWNERS
+`* @abermudez-14`
+
+
+- Crear regla para apuntar al archivo `CODEOWNERS`
+  
+![imagen](https://github.com/user-attachments/assets/d3af70cb-4e40-48f4-86b8-a132a3f2d023)
+
