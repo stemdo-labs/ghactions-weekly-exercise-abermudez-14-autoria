@@ -16,8 +16,8 @@ jobs:
 
 
   testear:
-      if: ${{ inputs.entorno }} == 'prod'
       runs-on: ubuntu-latest
+      if: ${{ inputs.entorno  == 'prod' }}
       steps:
           - name: test
             run: | 
