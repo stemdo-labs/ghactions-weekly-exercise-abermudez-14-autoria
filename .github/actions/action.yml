@@ -14,8 +14,17 @@ outputs:
 runs:
   using: "composite"
   steps:
+
       
     - name: Guardar nombre completo 
       id: nombre_completo
-      run: echo "nombre_completo=${{ inputs.nombre_imagen }}:${{ inputs.version }}" >> $GITHUB_OUTPUT
+      run: |
+        if [ "${{ github.ref }}" == "refs/heads/main" ]; then
+           echo "nombre_completo=${{ inputs.nombre_imagen }}:${{ inputs.version }}" >> $GITHUB_OUTPUT
+        elif [ "${{ github.ref }}" == "refs/heads/development" ]; then
+         echo "nombre_completo=${{ inputs.nombre_imagen }}:${{ inputs.version }}-snapshot" >> $GITHUB_OUTPUT
+        else
+          echo "Rama distinta a main / develop, entorno no configurado"
+        fi
+         
       shell: bash
